@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: postgres:11.2
+    env_file:
+      - docker.env
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+    ports:
+     - "5432:5432"
+  django:
+    build:
+      context: .
+      args:
+        requirements: requirements-dev.txt
+    tty: true
+    user: "1000"
+    volumes:
+      - ./losamax:/code/losamax
+    ports:
+      - "8000:8000"
+    env_file:
+      - docker.env
+    environment:
+      - DJANGO_SETTINGS_MODULE=losamax.settings
+      - PROJECT_PACKAGE=losamax
+    depends_on:
+      - db
+    working_dir: /code/
+    command: /code/venv/bin/python3.6 ./manage.py runserver 0.0.0.0:8000
+volumes:
+  postgresql:
