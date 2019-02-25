@@ -1,2 +1,3 @@
-# losamax
-Winamax but for looser
+# Losamax
+
+*Winamax but for looser*
