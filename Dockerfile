@@ -19,6 +19,6 @@ RUN chown django:django -R /code
 USER django
 RUN python3.6 -m venv venv
 RUN /code/venv/bin/pip3.6 install setuptools wheel -U
-RUN /code/venv/bin/pip3.6 install --no-cache-dir -r ./{requirements}$ --upgrade
+RUN /code/venv/bin/pip3.6 install --no-cache-dir -r ./${requirements} --upgrade
 USER django
 RUN mkdir -p /code/public/static /code/public/media
