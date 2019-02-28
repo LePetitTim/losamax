@@ -1,11 +1,11 @@
-FROM ubuntu:bionic
+﻿FROM ubuntu:bionic
 ARG  requirements=requirements.txt
 RUN mkdir /code
-ADD apt.txt /code/apt.txt
 
 # project dependencies
 RUN apt-get update
-RUN apt-get install -y $(grep -vE "^\s*#" /code/apt.txt  | tr "\n" " ") && apt-get clean all && apt-get autoclean
+RUN apt-get install -y git apt-utils software-properties-common sudo python3 python3-dev python3-venv less nano wget curl build-essential ca-certificates gettext binutils libproj-dev postgresql-server-dev-all dialog
+RUN apt-get clean all && apt-get autoclean
 RUN apt-get upgrade -y
 RUN useradd -ms /bin/bash django --uid 1000
 WORKDIR /code
